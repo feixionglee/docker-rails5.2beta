@@ -9,13 +9,22 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+      - redis
 
   postgres:
     image: postgres:9.6
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
     ports:
       - "5432"
 
+  redis:
+    image: "redis:alpine"
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379"
+
 volumes:
-  db-data:
+  pg-data:
+  redis-data:
